@@ -1,5 +1,7 @@
 package fr.formation.credit;
 
+import fr.formation.credit.models.Type;
+
 /**
  * @author Administrateur
  */
@@ -14,11 +16,11 @@ public class Application {
 	System.out.println("How many do you want?");
 	simulator.setAmount(Utils.readInt());
 	System.out.println(
-		"Wich type of credit do you want ? 1:REAL_ESTATE, 2:AUTOMOBILE, 3:WORKS");
-	simulator.setType(Type.valueOf(Utils.readString().toUpperCase()));
-	System.out.println("How much is your assurance rating ?");
+		"What kind of credit ? 1: REAL_ESTATE, 2: AUTOMOBILE, 3: WORKS");
+	simulator.setType(Type.values()[Utils.readInt() + 1]);
+	System.out.println("How much is your assurance rating percent?");
 	simulator.setAssuranceRating(Utils.readDouble() / 100);
-	System.out.println("How much is your credit rating ?");
+	System.out.println("How much is your credit rating percent?");
 	simulator.setCreditRating(Utils.readDouble() / 100);
 	while (!inputOk) {
 	    System.out.println("Enter the date of start: yyyy-mm");

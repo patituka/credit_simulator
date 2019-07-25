@@ -2,6 +2,9 @@ package fr.formation.credit.models;
 
 import java.time.LocalDate;
 
+/**
+ * @author Pati
+ */
 public class AmortizedLoan {
 
     private LocalDate date;
@@ -75,7 +78,10 @@ public class AmortizedLoan {
     }
 
     /**
+     * The contructor generate the total payment and outstanding
+     *
      * @param date
+     *                  of start
      * @param capital
      * @param annuity
      * @param interest

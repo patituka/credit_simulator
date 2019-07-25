@@ -1,5 +1,8 @@
-package fr.formation.credit;
+package fr.formation.credit.models;
 
+/**
+ * @author Administrateur
+ */
 public enum Type {
     REAL_ESTATE(1), AUTOMOBILE(2), WORKS(3);
 

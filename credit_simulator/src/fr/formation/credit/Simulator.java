@@ -2,6 +2,8 @@ package fr.formation.credit;
 
 import java.time.LocalDate;
 
+import fr.formation.credit.models.Type;
+
 /**
  * @author Administrateur
  */

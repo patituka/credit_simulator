@@ -18,12 +18,6 @@ public class Utils {
 	return res;
     }
 
-    public static boolean readBoolean() {
-	boolean res = scan.nextBoolean();
-	scan.nextLine();
-	return res;
-    }
-
     public static double readDouble() {
 	double res = scan.nextDouble();
 	scan.nextLine();
