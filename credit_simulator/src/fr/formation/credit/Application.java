@@ -17,9 +17,9 @@ public class Application {
 		"Wich type of credit do you want ? 1:REAL_ESTATE, 2:AUTOMOBILE, 3:WORKS");
 	simulator.setType(Type.valueOf(Utils.readString().toUpperCase()));
 	System.out.println("How much is your assurance rating ?");
-	simulator.setAssuranceRating(Utils.readDouble());
+	simulator.setAssuranceRating(Utils.readDouble() / 100);
 	System.out.println("How much is your credit rating ?");
-	simulator.setCreditRating(Utils.readDouble());
+	simulator.setCreditRating(Utils.readDouble() / 100);
 	while (!inputOk) {
 	    System.out.println("Enter the date of start: yyyy-mm");
 	    try {
@@ -32,8 +32,7 @@ public class Application {
 	System.out.println("Enter the duration of the credit wanted in years:");
 	simulator.setDuration(Utils.readInt());
 	System.out.println(simulator.toString());
-	Amortization.calcul(simulator);
 	System.out.println("$$$$$$$$$$$$$$$$$$$$$");
-	Amortization.calculMensual(simulator);
+	Amortization.calcul(simulator);
     }
 }
