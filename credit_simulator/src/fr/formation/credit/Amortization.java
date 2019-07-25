@@ -25,12 +25,11 @@ public class Amortization {
 	LocalDate date = simulator.getDateStart();
 	double capital = simulator.getAmount();
 	double annuity = capital / simulator.getDuration() / 12;
-	double interest = capital * simulator.getCreditRating();
-	double assurance = capital * simulator.getAssuranceRating();
+	double interest = capital * simulator.getCreditRating() / 12;
+	double assurance = capital * simulator.getAssuranceRating() / 12;
 	List<AmortizedLoan> amortizedLoans = new ArrayList<>();
 	for (int i = 1; i <= simulator.getDuration(); i++) {
 	    interest = capital * simulator.getCreditRating() / 12;
-	    assurance = capital * simulator.getCreditRating() / 12;
 	    for (int j = 1; j <= 12; j++) {
 		month++;
 		capital -= annuity;
@@ -56,7 +55,7 @@ public class Amortization {
 
     /**
      * This method convert the double
-     * 
+     *
      * @param num
      * @return a double number with 2 decimal only
      */

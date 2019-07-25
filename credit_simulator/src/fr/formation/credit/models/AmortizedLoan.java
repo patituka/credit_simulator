@@ -1,6 +1,5 @@
 package fr.formation.credit.models;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class AmortizedLoan {
@@ -15,7 +14,25 @@ public class AmortizedLoan {
 
     private double assurance;
 
-    DecimalFormat df = new DecimalFormat("0.00");
+    private double totalPayment;
+
+    private double outstanding;
+
+    public double getOutstanding() {
+	return outstanding;
+    }
+
+    public void setOutstanding(double outstanding) {
+	this.outstanding = outstanding;
+    }
+
+    public double getTotalPayment() {
+	return totalPayment;
+    }
+
+    public void setTotalPayment(double totalPayment) {
+	this.totalPayment = totalPayment;
+    }
 
     public LocalDate getDate() {
 	return date;
@@ -58,26 +75,6 @@ public class AmortizedLoan {
     }
 
     /**
-     * @return a string
-     */
-    @Override
-    public String toString() {
-	StringBuilder builder = new StringBuilder();
-	builder.append("AmortizedLoan [date=");
-	builder.append(date);
-	builder.append(", capital=");
-	builder.append(df.format(capital));
-	builder.append(", annuity=");
-	builder.append(df.format(annuity));
-	builder.append(", interest=");
-	builder.append(df.format(interest));
-	builder.append(", assurance=");
-	builder.append(df.format(assurance));
-	builder.append("]");
-	return builder.toString();
-    }
-
-    /**
      * @param date
      * @param capital
      * @param annuity
@@ -91,5 +88,28 @@ public class AmortizedLoan {
 	this.annuity = annuity;
 	this.interest = interest;
 	this.assurance = assurance;
+	totalPayment = annuity + interest + assurance;
+	outstanding = capital - annuity;
+    }
+
+    @Override
+    public String toString() {
+	StringBuilder builder = new StringBuilder();
+	builder.append("AmortizedLoan [date=");
+	builder.append(date);
+	builder.append(", capital=");
+	builder.append(capital);
+	builder.append(", annuity=");
+	builder.append(annuity);
+	builder.append(", interest=");
+	builder.append(interest);
+	builder.append(", assurance=");
+	builder.append(assurance);
+	builder.append(", totalPayment=");
+	builder.append(totalPayment);
+	builder.append(", outstanding=");
+	builder.append(outstanding);
+	builder.append("]");
+	return builder.toString();
     }
 }
