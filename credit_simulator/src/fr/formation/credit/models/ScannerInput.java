@@ -41,7 +41,8 @@ public class ScannerInput {
 
     private void setDateStart(LocalDate dateStart) {
 	if (dateStart.isBefore(LocalDate.now())) {
-	    throw new IllegalArgumentException("The date must be after today");
+	    throw new IllegalArgumentException(
+		    "Date must be later than today!!!");
 	}
 	this.dateStart = dateStart;
     }

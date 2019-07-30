@@ -70,36 +70,18 @@ public class Utils {
 	}
     }
 
-    /**
-     * Method to validate the date
-     *
-     * @param value
-     * @return boolean
-     */
-    public static boolean isValidDate(String value) {
-	LocalDate date = null;
-	DateTimeFormatter fomatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-	try {
-	    date = LocalDate.parse(value, fomatter);
-	    String result = date.format(fomatter);
-	    return result.equals(value) && date.isAfter(LocalDate.now());
-	} catch (DateTimeParseException e) {
-	    System.out.println(e.getMessage());
-	} catch (IllegalArgumentException e) {
-	    System.out.println(e.getMessage());
-	}
-	return false;
-    }
-
     static LocalDate inputStartDate() {
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	while (true) {
-	    System.out.println("Enter the date of start: yyyy/mm/dd");
+	    System.out.println("Enter the date of start dd/MM/yyyy");
 	    try {
-		if (isValidDate(scan.nextLine())) {
-		    CharSequence res = scan.nextLine();
-		    return LocalDate.parse(res);
-		}
+		LocalDate date = LocalDate.parse(scan.nextLine(), formatter);
+		return date;
 	    } catch (InputMismatchException e) {
+		System.out.println(e.getMessage());
+		scan.nextLine();
+	    } catch (DateTimeParseException e) {
+		System.out.println(e.getMessage());
 		scan.nextLine();
 	    }
 	}
@@ -159,13 +141,13 @@ public class Utils {
      * Static methode to add month in a date
      *
      * @param date
-     *              a date
+     *              string
      * @param month
-     *              a number of month
+     *              int
      * @return string of date
      */
     public static String incremente(String date, Integer month) {
-	DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+	DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMM");
 	return LocalDate.parse(date).plusMonths(month).format(format);
     }
 
