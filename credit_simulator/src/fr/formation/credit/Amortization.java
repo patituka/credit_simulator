@@ -1,13 +1,12 @@
 package fr.formation.credit;
 
 import java.text.DateFormatSymbols;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.formation.credit.models.AmortizedLoan;
+import fr.formation.credit.models.ScannerInput;
 
 /**
  * @author Pati
@@ -15,32 +14,36 @@ import fr.formation.credit.models.AmortizedLoan;
 public class Amortization {
 
     /**
-     * This method calculate the credit mensual amortization
+     * This method calculate the credit mensual amortization the calcul of the
+     * annuity is : Amount x INTEREST / (1 - 1 + txINTEREST) ^DURATION
      *
-     * @param simulator
-     *                  a simulator generated with the scanner
+     * @param si
+     *           a simulator generated with the scanner
+     * @return a list of object s
      */
-    public static void calcul(Simulator simulator) {
+    public static List<AmortizedLoan> calcul(ScannerInput si) {
 	int month = 0;
-	LocalDate date = simulator.getDateStart();
-	double capital = simulator.getAmount();
-	double annuity = capital / simulator.getDuration() / 12;
-	double interest = capital * simulator.getCreditRating() / 12;
-	double assurance = capital * simulator.getAssuranceRating() / 12;
+	LocalDate date = si.getDateStart();
+	double capital = si.getAmount();
+	int duration = si.getDuration();
+	double tauxGlobal = si.getCreditRating() + si.getAssuranceRating();
+	double annuity = annuityCalcul(capital, tauxGlobal, duration);
+	double interest = 0;
+	double assurance = capital * si.getAssuranceRating();
 	List<AmortizedLoan> amortizedLoans = new ArrayList<>();
-	for (int i = 1; i <= simulator.getDuration(); i++) {
-	    interest = capital * simulator.getCreditRating() / 12;
-	    for (int j = 1; j <= 12; j++) {
-		month++;
-		capital -= annuity;
+	for (int i = 0; i < duration; i++) {
+	    System.out.println(annuity);
+	    interest = capital * si.getCreditRating();
+	    for (int j = 0; j < 12; j++) {
 		AmortizedLoan amortizedLoan = new AmortizedLoan(
-			date.plusMonths(month), decimal(capital),
-			decimal(annuity), decimal(interest),
-			decimal(assurance));
+			date.plusMonths(month), capital, annuity / 12,
+			interest / 12, assurance);
 		amortizedLoans.add(amortizedLoan);
+		month++;
+		capital -= annuity / 12;
 	    }
 	}
-	amortizedLoans.forEach(System.out::println);
+	return amortizedLoans;
     }
 
     /**
@@ -54,16 +57,15 @@ public class Amortization {
     }
 
     /**
-     * This method convert the double
+     * Calculate the annuity for an amortization constante
      *
-     * @param num
-     * @return a double number with 2 decimal only
+     * @param capital
+     * @param rating
+     * @param duration
+     * @return the annuity in a double
      */
-    public static double decimal(double num) {
-	DecimalFormat df = new DecimalFormat("#.##");
-	DecimalFormatSymbols dfs = new DecimalFormatSymbols();
-	dfs.setDecimalSeparator('.');
-	df.setDecimalFormatSymbols(dfs);
-	return Double.valueOf(df.format(num));
+    public static double annuityCalcul(double capital, double rating,
+	    int duration) {
+	return capital * (rating / (1 - Math.pow(1 + rating, duration * -1)));
     }
 }

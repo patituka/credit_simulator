@@ -1,18 +1,35 @@
 package fr.formation.credit.models;
 
 /**
- * @author Administrateur
+ * @author Pati
  */
 public enum Type {
-    REAL_ESTATE(1), AUTOMOBILE(2), WORKS(3);
+    REAL_ESTATE {
 
-    private int value;
+	@Override
+	public Integer getMaxMonth() {
+	    return 360;
+	}
+    },
+    AUTOMOBILE {
 
-    private Type(int value) {
-	this.value = value;
-    }
+	@Override
+	public Integer getMaxMonth() {
+	    return 84;
+	}
+    },
+    WORKS {
 
-    public int getValue() {
-	return value;
-    }
+	@Override
+	public Integer getMaxMonth() {
+	    return 180;
+	}
+    };
+
+    /**
+     * Determine the max months time to get the credit
+     *
+     * @return Integer years
+     */
+    public abstract Integer getMaxMonth();
 }

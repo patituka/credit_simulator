@@ -17,7 +17,7 @@ public class AmortizedLoan {
 
     private double assurance;
 
-    private double totalPayment;
+    private double amortization;
 
     private double outstanding;
 
@@ -29,12 +29,12 @@ public class AmortizedLoan {
 	this.outstanding = outstanding;
     }
 
-    public double getTotalPayment() {
-	return totalPayment;
+    public double getAmortization() {
+	return amortization;
     }
 
-    public void setTotalPayment(double totalPayment) {
-	this.totalPayment = totalPayment;
+    public void setAmortization(double amortization) {
+	this.amortization = amortization;
     }
 
     public LocalDate getDate() {
@@ -94,8 +94,8 @@ public class AmortizedLoan {
 	this.annuity = annuity;
 	this.interest = interest;
 	this.assurance = assurance;
-	totalPayment = annuity + interest + assurance;
-	outstanding = capital - annuity;
+	amortization = annuity - (interest + assurance);
+	outstanding = capital - amortization;
     }
 
     @Override
@@ -111,8 +111,8 @@ public class AmortizedLoan {
 	builder.append(interest);
 	builder.append(", assurance=");
 	builder.append(assurance);
-	builder.append(", totalPayment=");
-	builder.append(totalPayment);
+	builder.append(", amortization=");
+	builder.append(amortization);
 	builder.append(", outstanding=");
 	builder.append(outstanding);
 	builder.append("]");
