@@ -17,14 +17,6 @@ public class Utils {
 
     public static Scanner scan = new Scanner(System.in);
 
-    /**
-     * @return
-     */
-    public static String readString() {
-	String res = scan.nextLine();
-	return res;
-    }
-
     static int inputAmount() {
 	while (true) {
 	    System.out.println("Insert amount:");
@@ -52,7 +44,7 @@ public class Utils {
 	while (true) {
 	    System.out.println("How much is your assurance rating percent?");
 	    try {
-		return scan.nextInt() / 100;
+		return scan.nextDouble() / 100;
 	    } catch (InputMismatchException e) {
 		scan.nextLine();
 	    }
@@ -63,7 +55,7 @@ public class Utils {
 	while (true) {
 	    System.out.println("How much is your credit rating percent?");
 	    try {
-		return scan.nextInt() / 100;
+		return scan.nextDouble() / 100;
 	    } catch (InputMismatchException e) {
 		scan.nextLine();
 	    }
@@ -87,54 +79,16 @@ public class Utils {
 	}
     }
 
-    static int inputDuration() {
+    static int inputDuration(Type type) {
 	while (true) {
-	    System.out.println("Enter the duration of the credit in years:");
+	    System.out.println("Enter the duration (" + type.getMaxMonth() / 12
+		    + " years maximum for " + type.name() + " loan )");
 	    try {
 		return scan.nextInt();
 	    } catch (InputMismatchException e) {
 		scan.nextLine();
 	    }
 	}
-    }
-
-    /**
-     * @param msg
-     *            input in the console
-     * @return int
-     */
-    public static int readInt(String msg) {
-	int num = 0;
-	boolean loop = true;
-	while (loop) {
-	    try {
-		System.out.println(msg);
-		num = scan.nextInt();
-		loop = false;
-	    } catch (InputMismatchException e) {
-		System.out.println("Invalid value!");
-		scan.next();
-	    }
-	}
-	return num;
-    }
-
-    /**
-     * @return
-     */
-    public static int readInt() {
-	int res = scan.nextInt();
-	scan.nextLine();
-	return res;
-    }
-
-    /**
-     * @return
-     */
-    public static double readDouble() {
-	double res = scan.nextDouble();
-	scan.nextLine();
-	return res;
     }
 
     /**

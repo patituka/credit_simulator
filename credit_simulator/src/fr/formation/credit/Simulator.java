@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import fr.formation.credit.models.ScannerInput;
 import fr.formation.credit.models.Type;
 
+/**
+ * @author Pati
+ */
 public class Simulator {
 
     /**
@@ -14,7 +17,7 @@ public class Simulator {
 	int amount = Utils.inputAmount();
 	Type type = Utils.inputType();
 	LocalDate dateStart = Utils.inputStartDate();
-	int duration = Utils.inputDuration();
+	int duration = Utils.inputDuration(type);
 	double assuranceRating = Utils.inputRatingAssurance();
 	double creditRating = Utils.inputRatingCredit();
 	return new ScannerInput(amount, type, dateStart, duration,

@@ -3,7 +3,7 @@ package fr.formation.credit.models;
 import java.time.LocalDate;
 
 /**
- * @author Administrateur
+ * @author Pati
  */
 public class ScannerInput {
 
@@ -52,10 +52,11 @@ public class ScannerInput {
     }
 
     private void setDuration(int duration) {
-	if (duration * 12 > type.getMaxMonth()) {
+	Integer d = duration * 12;
+	if (d.compareTo(type.getMaxMonth()) > 0) {
 	    throw new IllegalArgumentException(
 		    type.name() + " loan must have a duration of "
-			    + type.getMaxMonth() / 12 + "years maximum !!");
+			    + type.getMaxMonth() / 12 + " years maximum !!");
 	}
 	this.duration = duration;
     }
