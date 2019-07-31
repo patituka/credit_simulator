@@ -29,7 +29,6 @@ public class Amortization {
 	double tauxGlobal = input.getCreditRating()
 		+ input.getAssuranceRating();
 	double annuity = annuityCalcul(capital, tauxGlobal, duration);
-	double mensualAnnuity = annuity / 12;
 	double interest = 0;
 	double assurance = capital * input.getAssuranceRating();
 	List<AmortizedLoan> amortizedLoans = new ArrayList<>();

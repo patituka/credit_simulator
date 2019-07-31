@@ -27,7 +27,7 @@ public enum Type {
     };
 
     /**
-     * Determine the max months time to get the credit
+     * Determine the max months time to pay off the loan
      *
      * @return Integer years
      */
