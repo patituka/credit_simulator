@@ -67,8 +67,7 @@ public class Utils {
 	while (true) {
 	    System.out.println("Enter the date of start dd/MM/yyyy");
 	    try {
-		LocalDate date = LocalDate.parse(scan.nextLine(), formatter);
-		return date;
+		return LocalDate.parse(scan.nextLine(), formatter);
 	    } catch (InputMismatchException e) {
 		System.out.println(e.getMessage());
 		scan.nextLine();

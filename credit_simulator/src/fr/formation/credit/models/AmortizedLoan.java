@@ -2,6 +2,8 @@ package fr.formation.credit.models;
 
 import java.time.LocalDate;
 
+import fr.formation.credit.Utils;
+
 /**
  * @author Pati
  */
@@ -104,17 +106,17 @@ public class AmortizedLoan {
 	builder.append("AmortizedLoan [date=");
 	builder.append(date);
 	builder.append(", capital=");
-	builder.append(capital);
+	builder.append(Utils.decimal(capital));
 	builder.append(", annuity=");
-	builder.append(annuity);
+	builder.append(Utils.decimal(annuity));
 	builder.append(", interest=");
-	builder.append(interest);
+	builder.append(Utils.decimal(interest));
 	builder.append(", assurance=");
-	builder.append(assurance);
+	builder.append(Utils.decimal(assurance));
 	builder.append(", amortization=");
-	builder.append(amortization);
+	builder.append(Utils.decimal(amortization));
 	builder.append(", outstanding=");
-	builder.append(outstanding);
+	builder.append(Utils.decimal(outstanding));
 	builder.append("]");
 	return builder.toString();
     }

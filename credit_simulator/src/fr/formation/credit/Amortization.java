@@ -17,30 +17,35 @@ public class Amortization {
      * This method calculate the credit mensual amortization the calcul of the
      * annuity is : Amount x INTEREST / (1 - 1 + txINTEREST) ^DURATION
      *
-     * @param si
-     *           a simulator generated with the scanner
+     * @param input
+     *              a simulator generated with the scanner
      * @return a list of object s
      */
-    public static List<AmortizedLoan> calcul(ScannerInput si) {
+    public static List<AmortizedLoan> calcul(ScannerInput input) {
 	int month = 0;
-	LocalDate date = si.getDateStart();
-	double capital = si.getAmount();
-	int duration = si.getDuration();
-	double tauxGlobal = si.getCreditRating() + si.getAssuranceRating();
+	LocalDate date = input.getDateStart();
+	double capital = input.getAmount();
+	int duration = input.getDuration();
+	double tauxGlobal = input.getCreditRating()
+		+ input.getAssuranceRating();
 	double annuity = annuityCalcul(capital, tauxGlobal, duration);
+	double mensualAnnuity = annuity / 12;
 	double interest = 0;
-	double assurance = capital * si.getAssuranceRating();
+	double assurance = capital * input.getAssuranceRating();
 	List<AmortizedLoan> amortizedLoans = new ArrayList<>();
 	for (int i = 0; i < duration; i++) {
 	    System.out.println(annuity);
-	    interest = capital * si.getCreditRating();
+	    // calculate every years the interest amount
+	    interest = capital * input.getCreditRating();
 	    for (int j = 0; j < 12; j++) {
+		// add the values amount in an object every month
 		AmortizedLoan amortizedLoan = new AmortizedLoan(
 			date.plusMonths(month), capital, annuity / 12,
 			interest / 12, assurance);
 		amortizedLoans.add(amortizedLoan);
 		month++;
-		capital -= annuity / 12;
+		// set the capital remaining
+		capital = amortizedLoan.getOutstanding();
 	    }
 	}
 	return amortizedLoans;
